@@ -1,0 +1,32 @@
+port: 3000
+
+# Available environment
+# development, staging, production
+# if not set default to development
+environment:
+
+# TRACE (-1): for tracing the code execution path.
+# DEBUG (0): messages useful for troubleshooting the program.
+# INFO (1): messages describing the normal operation of an application.
+# WARNING (2): for logging events that need may need to be checked later.
+# ERROR (3): error messages for a specific operation.
+# FATAL (4): severe errors where the application cannot recover. os.Exit(1) is called after the message is logged.
+# PANIC (5): similar to FATAL, but panic() is called instead.
+log_level: -1
+
+database:
+  postgres:
+    host: db
+    user: admin
+    password: 1234
+    dbname: brick
+    port: 5432
+    ssl_mode: disable
+    connection_max_lifetime: 20
+    connection_max_open: 15
+    connection_max_idle: 2
+    connection_max_idle_time: 10
+
+external:
+  bankabc:
+    baseurl: https://mock.apidog.com/m1/520155-0-default
