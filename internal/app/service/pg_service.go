@@ -89,7 +89,7 @@ func (s *PG) Transfer(ctx context.Context, transfer modelpg.TransferRequest) (*m
 	}
 
 	//insert with different goroutine
-	go func(transfer modelpg.TransferRequest, refNo string, amount decimal.Decimal, ctx context.Context) {
+	go func(transfer modelpg.TransferRequest, refNo string, amount decimal.Decimal) {
 
 		now := time.Now()
 
@@ -141,12 +141,12 @@ func (s *PG) Transfer(ctx context.Context, transfer modelpg.TransferRequest) (*m
 			transferEntity.Channel = transfer.AdditionalInfo.Channel
 		}
 
-		errInsert := s.pgRepo.TransferInsert(ctx, &transferEntity)
+		errInsert := s.pgRepo.TransferInsert(context.Background(), &transferEntity)
 		if errInsert != nil {
 			//this error should be retryable
 			s.log.Err(errInsert).Send()
 		}
-	}(transfer, RefNo, amountValue, ctx)
+	}(transfer, RefNo, amountValue)
 
 	result := modelpg.TransferResponse{
 		PartnerReferenceNo: transfer.PartnerReferenceNo,

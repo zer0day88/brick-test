@@ -12,7 +12,7 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /root
 COPY --from=builder /go/bin/pg .
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
-COPY config config/
+COPY config/config-docker.yml config/config.yml
 ENV TZ=Asia/Jakarta
 
 ENTRYPOINT ["/root/pg"]

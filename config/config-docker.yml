@@ -16,7 +16,7 @@ log_level: -1
 
 database:
   postgres:
-    host: localhost
+    host: db
     user: admin
     password: 1234
     dbname: brick
